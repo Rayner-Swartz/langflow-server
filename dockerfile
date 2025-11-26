@@ -1,13 +1,8 @@
-FROM python:3.11-slim
+# Use Langflow’s official lightweight image
+FROM langflowai/langflow:latest
 
-# Install system deps
-RUN apt-get update && apt-get install -y build-essential && rm -rf /var/lib/apt/lists/*
-
-# Install Langflow
-RUN pip install --upgrade pip && pip install langflow
-
-# Expose Langflow port
+# Expose port
 EXPOSE 7860
 
-# Start Langflow
+# Start Langflow server
 CMD ["langflow", "--host", "0.0.0.0", "--port", "7860"]
