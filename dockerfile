@@ -1,12 +1,11 @@
+# Use the official Langflow image
 FROM langflowai/langflow:latest
 
-# (optional) if you want to preload flows, copy them in here
-
-# Langflow default port inside the container
+# Langflow default port inside the container (not critical for Render, but fine)
 EXPOSE 7860
 
-# Make sure we bind to Render's port
+# Make sure we bind to all interfaces
 ENV LANGFLOW_HOST=0.0.0.0
 
-# Use $PORT if Render sets it, otherwise fall back to 7860
-CMD ["bash", "-lc", "langflow run --host 0.0.0.0 --port ${PORT:-7860}"]
+# Use $PORT if Render sets it, otherwise fall back to 7860 (for local runs)
+CMD ["bash", "-lc", "python -m langflow run --host 0.0.0.0 --port ${PORT:-7860}"]
